@@ -2,7 +2,7 @@ import os
 import asyncio
 import mysql.connector
 from playwright.async_api import async_playwright
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 
 # DB 接続情報を環境変数から取得
 DB_HOST = os.environ.get("DB_HOST", "localhost")
@@ -31,7 +31,9 @@ async def main():
         links2 = await page.locator("div#tp_market_right > ul > li > a").all()
         all_links = {}
         for link in links1 + links2:
-            scraped_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            # JST タイムゾーン
+            JST = timezone(timedelta(hours=9))
+            scraped_at = datetime.now(JST)
             href = await link.get_attribute("href")
             title = await link.inner_text()
             if href:

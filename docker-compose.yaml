@@ -31,5 +31,18 @@ services:
       - ./scraper:/app
     command: python scraper.py
 
+  api:
+    build: ./api
+    container_name: api
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_USER: newsuser
+      DB_PASSWORD: newpass
+      DB_NAME: newsdb
+    ports:
+      - "8003:8000"
 volumes:
   db_data:
