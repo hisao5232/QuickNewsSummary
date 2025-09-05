@@ -1,8 +1,21 @@
 from fastapi import FastAPI
 import mysql.connector
 import os
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+origins = [
+    "http://210.131.217.15:5173",  # React 開発サーバー
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 DB_HOST = os.environ.get("DB_HOST", "db")
 DB_USER = os.environ.get("DB_USER", "newsuser")
