@@ -4,9 +4,9 @@ import os
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
-
 origins = [
-    "http://210.131.217.15:5173",  # React 開発サーバー
+    "https://quicknews-api.go-pro-world.net",  # サブドメインからのアクセス
+    "https://quicknews.go-pro-world.net",
 ]
 
 app.add_middleware(

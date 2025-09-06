@@ -5,10 +5,10 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Docker内からアクセスする場合のAPI URL
-    fetch("http://210.131.217.15:8003/news?limit=10")
+    fetch("https://quicknews-api.go-pro-world.net/news?limit=10")
       .then((res) => res.json())
       .then((data) => {
+        console.log("APIレスポンス:", data);
         setNews(data);
         setLoading(false);
       })
